@@ -1,0 +1,5 @@
+.Video__video-wrapper > video {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
