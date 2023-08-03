@@ -6,7 +6,7 @@ import { eyeOutline, trashOutline } from "ionicons/icons";
 import './Home.css';
 
 const Home: React.FC = () => {
-  const { REACT_APP_API_URL: API_URL, REACT_APP_AUTH_USER: AUTH_USER, REACT_APP_AUTH_PASSWORD: AUTH_PASSWORD } = process.env;
+  const { REACT_APP_API_URL: API_URL } = process.env;
   const history = useHistory();
   const [presentAlert] = useIonAlert();
   const [files, setFiles] = useState<string[]>([]);
@@ -47,11 +47,7 @@ const Home: React.FC = () => {
               try {
                 const res = await axios({
                   method: "DELETE",
-                  url: API_URL + "/api/" + encodeURI(file),
-                  auth: {
-                    username: AUTH_USER || 'foo',
-                    password: AUTH_PASSWORD || 'foo'
-                  }
+                  url: API_URL + "/api/" + encodeURI(file)
                 })
                 if (res && res.status === 200) {
                   toastHelper("Video successfully removed!");
@@ -75,11 +71,7 @@ const Home: React.FC = () => {
         try {
           const res = await axios({
             method: "GET",
-            url: API_URL + "/api/files",
-            auth: {
-              username: AUTH_USER || 'foo',
-              password: AUTH_PASSWORD || 'foo'
-            }
+            url: API_URL + "/api/files"
           })
           if (res && res.status === 200 && res["data"]) {
             const { files } = res["data"];
